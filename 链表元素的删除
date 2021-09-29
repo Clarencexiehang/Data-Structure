@@ -52,5 +52,5 @@ int main(){
 	struct test *L1=(struct test*)malloc(sizeof(struct test));
 	L1=Delete(L,4);
 	Display(L1);
-	return 0;
+	return 0；
 }
