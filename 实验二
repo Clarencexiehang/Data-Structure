@@ -1,0 +1,44 @@
+//Question 1
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+	int Data;
+	struct Node *next;
+};
+
+struct Node *CreateList(struct Node *l){
+	struct Node *p,*q,*head;
+	head=(struct Node*)malloc(sizeof(struct Node));
+	head->next=NULL;
+	p=q=(struct Node*)malloc(sizeof(struct Node));
+	int i=0;int putin;
+	for(i;i<10;i++){
+		if(head->next==NULL) head->next=p;
+		else q->next=p;
+		scanf("%d",&putin);
+		p->Data=putin;
+		q=p;
+		p=(struct Node*)malloc(sizeof(struct Node));
+	}
+	q->next=NULL;
+	return head;
+}
+
+void Display(struct Node *l){
+	if(l==NULL) printf("ERROR");
+	else{
+		while(l!=NULL){
+			printf("%d ",l->Data);
+			l=l->next;
+		}
+	}
+}
+
+int main(){
+	struct Node *p;
+	p=(struct Node*)malloc(sizeof(struct Node));
+	p=CreateList(p);
+	Display(p);
+	return 0;
+}
