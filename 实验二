@@ -194,7 +194,7 @@ int main(){
 	srand((int)time(NULL)); 
 	struct Node *p;
 	p=CreateList();
-    p=InitList(p,100);
+        p=InitList(p,100);
 	printf("新建链表为：\n");
 	Display(p);
 	struct Node *PosInt,*NegInt;
@@ -204,5 +204,71 @@ int main(){
 	Display(PosInt);
 	printf("\n\n负数链表："); 
 	Display(NegInt);
+	return 0;
+}
+
+//6
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+struct Node {
+	int Data;   
+	struct DNode * next;
+	struct DNode * previous;
+};
+
+struct Node * CreateList(){
+	struct Node *head=(struct Node*)malloc(sizeof(struct Node));
+	head->next=NULL; head->previous=NULL;
+	return head;
+}
+
+struct Node *InitList(struct Node *head,int size){
+	struct Node *p,*q;
+	p=q=(struct Node*)malloc(sizeof(struct Node));
+	int i=0;
+	for(i;i<size;i++){
+		if(head->next==NULL){head->next=p; p->previous=head;} 
+		else{ q->next=p; p->previous=q;	}
+		
+		p->Data=rand()%100+1; 
+		q=p;
+		p=(struct Node*)malloc(sizeof(struct Node));
+	}
+	q->next=head;
+	head->previous=q;
+	return head;
+}
+
+void OrderDisplay(struct Node *p){
+	struct Node *l;
+	l=p->next; 
+	int n=0;
+	while(l!=p){
+		if(n%10==0) printf("\n"); 
+		printf("%d  ",l->Data); 
+		l=l->next; n++;		
+	}
+}
+
+void ReorderDisplay(struct Node *p){
+	struct Node *l;
+	l=p->previous; 
+	int n=0;
+	while(l!=p){
+		if(n%10==0) printf("\n"); 
+		printf("%d  ",l->Data); 
+		l=l->previous; n++;		
+	}
+}
+
+int main(){
+	srand((int)time(NULL)); 
+	struct Node *p;
+	p=CreateList();
+    	p=InitList(p,10);
+	OrderDisplay(p);
+ 	ReorderDisplay(p);
 	return 0;
 }
